@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
-    <script src="index.js" defer></script>
+        <link rel="stylesheet" href="style.css">
+        <script src="index.js" defer></script>
 
-    <title>Blackjack</title>
-</head>
-<body>
-    <input id="start" type="button" value="Commencer une partie">
-    <input id="draw" type="button" value="Tirer une carte">
-    <input id="lock" type="button" value="Bloquer la main">
+        <title>Blackjack</title>
+    </head>
+    <body>
+        <div id="div-actions">
+            <input id="start" type="button" value="Commencer une partie">
+            <input id="draw" type="button" value="Tirer une carte">
+            <input id="lock" type="button" value="Bloquer la main">
+        </div>
 
+        <div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+          <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+        </div>
 
-    <div id="player">
-        <h2>Joueur</h2>
-        <p>Main : <span id="player-hand"></span></p>
-        <p>Points : <span id="player-points"></span></p>
-    </div>
-    <div id="dealer">
-        <h2>Banque</h2>
-        <p id="dealer-hand"></p>
-        <p id="dealer-points"></p>
-    </div>
-</body>
+        <div id="player">
+            <h2>Joueur</h2>
+            <p>Main : <span id="player-hand"></span></p>
+            <p>Points : <span id="player-points"></span></p>
+        </div>
+        <div id="dealer">
+            <h2>Banque</h2>
+            <p>Main : <span id="dealer-hand"></span></p>
+            <p>Points : <span id="dealer-points"></span></p>
+        </div>
+    </body>
 </html>

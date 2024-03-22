@@ -1,5 +1,6 @@
 let nbPoints = 0;
 let mainBloquee = false;
+let gameStatus = "early";
 
 const joueurs = {
     "banque": {
@@ -59,18 +60,30 @@ function integerToWord(num) {
 
 document.getElementById("draw").addEventListener('click', function() {
     drawCard(joueurs["Joueur 1"]);
+    drawCard(joueurs.banque);
 });
 document.getElementById("start").addEventListener('click', startRound);
 document.getElementById("lock").addEventListener('click', lockCards);
 
 function drawCard(joueur) {
+    if(gameStatus !== "playing") return;
     if(mainBloquee) return;
+
     let card = Math.floor(Math.random() * 52);
     joueur.main.push(cards[card]);
     joueur.pointsMain = countPoints(joueur)
+
     document.getElementById("player-hand").textContent = joueurs["Joueur 1"].main;
     document.getElementById("player-points").textContent = joueurs["Joueur 1"].pointsMain;
-}   
+
+    document.getElementById("dealer-hand").textContent = joueurs.banque.main;
+    document.getElementById("dealer-points").textContent = joueurs.banque.pointsMain;
+    
+    if (joueur.pointsMain > 21) {
+        console.log("La partie est perdue");
+        mainBloquee = true;
+    }
+}
 
 function countPoints(joueur) {
     let points = 0;
@@ -81,40 +94,24 @@ function countPoints(joueur) {
 }
 
 function startRound() {
+    gameStatus = "playing";
+    mainBloquee = false;
+    document.getElementById("start").style.opacity = 0;
     console.log("Début de la partie");
 
-    joueurs["banque"].main = [];
-    joueurs["Joueur 1"].main = [];
-    joueurs["banque"].pointsMain = 0;
-    joueurs["Joueur 1"].pointsMain = 0;
 
-    console.log("La banque vous distribue une carte");
-    drawCard(joueurs["Joueur 1"]);
-
-    console.log("La banque se distribue une carte");
-    drawCard(joueurs["banque"]);
-
-    console.log("La banque vous distribue une carte");
-    drawCard(joueurs["Joueur 1"]);
-
-    console.log("La banque se distribue une carte");
-    drawCard(joueurs["banque"]);
-
-    console.log("Main JOUEUR : ")
-    joueurs["Joueur 1"].main.forEach(card => {
-        console.log(card);
+    Object.entries(joueurs).forEach(([key, _]) => {
+        joueurs[key].main = [];
+        joueurs[key].pointMain = 0;
     });
-    console.log(joueurs["Joueur 1"].pointsMain);
-    
-    console.log("Main BANQUE : ")
-    joueurs["banque"].main.forEach(card => {
-        console.log(card);
-    });
-    console.log(joueurs["banque"].pointsMain);
+
+    for(let i = 0; i < 2; ++i) {
+        Object.entries(joueurs).forEach( ([k, _])=> {
+            drawCard(joueurs[k]);
+        });
+    }
 
     console.log("C'est à vous de jouer")
-
-    
 }
 
 function lockCards() {
