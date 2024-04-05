@@ -3,33 +3,42 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
         <script src="index.js" defer></script>
 
         <title>Blackjack</title>
     </head>
     <body>
-        <div id="div-actions">
+
+        <div id="main">
+            <div id="dealer" class="mt-24">
+                <div class="cards">
+                    <img src="images/queen_of_hearts.svg" alt="queen">
+                </div>
+                <h1>BANQUE</h1>
+            </div>
+
+            <div id="player" class="mb-24">
+                <h1>JOUEUR</h1>
+                <div class="cards">
+
+                </div>
+            </div>
+        </div>
+        
+        
+
+        
+        <div id="buttons">
             <input id="start" type="button" value="Commencer une partie">
             <input id="draw" type="button" value="Tirer une carte">
-            <input id="lock" type="button" value="Bloquer la main">
+            <input id="lock" type="button" value="Bloquer la main"> 
         </div>
 
-        <div class="alert">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-          <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
-        </div>
-
-        <div id="player">
-            <h2>Joueur</h2>
-            <p>Main : <span id="player-hand"></span></p>
-            <p>Points : <span id="player-points"></span></p>
-        </div>
-        <div id="dealer">
-            <h2>Banque</h2>
-            <p>Main : <span id="dealer-hand"></span></p>
-            <p>Points : <span id="dealer-points"></span></p>
-        </div>
+        
+        
     </body>
 </html>

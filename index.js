@@ -47,9 +47,12 @@ function integerToWord(num) {
         case 9:
             return "10-valet";
         case 10:
-            return "10-dame";
-        case 11:
-            return "10-roi";
+            Banque
+            
+            Main :
+            
+            Points :
+            
         case 12:
             return "11-as";
         default:
@@ -57,9 +60,12 @@ function integerToWord(num) {
     }
 }
 //
+Banque
 
-document.getElementById("draw").addEventListener('click', function() {
-    drawCard(joueurs["Joueur 1"]);
+Main :
+
+Points :
+
     drawCard(joueurs.banque);
 });
 document.getElementById("start").addEventListener('click', startRound);
@@ -76,8 +82,13 @@ function drawCard(joueur) {
     document.getElementById("player-hand").textContent = joueurs["Joueur 1"].main;
     document.getElementById("player-points").textContent = joueurs["Joueur 1"].pointsMain;
 
-    document.getElementById("dealer-hand").textContent = joueurs.banque.main;
-    document.getElementById("dealer-points").textContent = joueurs.banque.pointsMain;
+    document.getElementById("dealer-hand").textCo
+    Banque
+    
+    Main :
+    
+    Points :
+    Content = joueurs.banque.pointsMain;
     
     if (joueur.pointsMain > 21) {
         console.log("La partie est perdue");
