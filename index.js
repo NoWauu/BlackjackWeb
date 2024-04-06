@@ -47,12 +47,9 @@ function integerToWord(num) {
         case 9:
             return "10-valet";
         case 10:
-            Banque
-            
-            Main :
-            
-            Points :
-            
+            return "10-dame";
+        case 11:
+            return "10-roi";
         case 12:
             return "11-as";
         default:
@@ -60,16 +57,14 @@ function integerToWord(num) {
     }
 }
 //
-Banque
-
-Main :
-
-Points :
-
+document.getElementById("draw").addEventListener('click', function() {
+    drawCard(joueurs["Joueur 1"]);
     drawCard(joueurs.banque);
 });
 document.getElementById("start").addEventListener('click', startRound);
 document.getElementById("lock").addEventListener('click', lockCards);
+
+let nbCardsPlayer = -2;
 
 function drawCard(joueur) {
     if(gameStatus !== "playing") return;
@@ -78,22 +73,29 @@ function drawCard(joueur) {
     let card = Math.floor(Math.random() * 52);
     joueur.main.push(cards[card]);
     joueur.pointsMain = countPoints(joueur)
-
+/*
     document.getElementById("player-hand").textContent = joueurs["Joueur 1"].main;
     document.getElementById("player-points").textContent = joueurs["Joueur 1"].pointsMain;
 
-    document.getElementById("dealer-hand").textCo
-    Banque
+    document.getElementById("dealer-hand").textContent = joueurs.banque.main;
+    document.getElementById("dealer-points").textContent = joueurs.banque.pointsMain;
+    */
+
+
+    let newCard = document.createElement("img");
+    newCard.src = "images/10_of_clubs.svg";
+    newCard.className = "card";
+    newCard.style.rotate = `${nbCardsPlayer*5}deg`;
+
+    document.getElementById("player-hand").append(newCard);
     
-    Main :
-    
-    Points :
-    Content = joueurs.banque.pointsMain;
-    
+    nbCardsPlayer++;
+/*
     if (joueur.pointsMain > 21) {
         console.log("La partie est perdue");
         mainBloquee = true;
     }
+*/
 }
 
 function countPoints(joueur) {
