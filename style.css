@@ -1,16 +1,13 @@
+html {
+    user-select: none;
+}
+
 body {
     height: 100vh;
     width: 100%;
     margin: 0;
     padding: 0;
     background: linear-gradient(90deg, rgb(0, 144, 10),  rgb(0, 74, 17) 60%, rgb(0, 144, 10));
-}
-
-#buttons {
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    top: 70%
 }
 
 input {
@@ -70,12 +67,20 @@ input {
 .card {
     position: relative;
     z-index: 0;
-    rotate: -5deg;
     margin-left: -90px;
 }
 
+.card:hover {
+    z-index: 2;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
 .cover {
-    content: url("images/back.svg")
+    content: url("images/back.svg");
+}
+
+.cover:hover {
+    box-shadow: none;
 }
 
 .bank-card {
