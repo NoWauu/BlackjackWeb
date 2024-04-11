@@ -102,17 +102,17 @@ function drawCard(nom, joueur) {
     let newCard = document.createElement("img");
     newCard.src = `images/${getCardImg(cards[card])}`;
     newCard.className = "card";
-    /*if (nom === "banque") {
+    if (nom === "banque") {
         newCard.classList.add("cover");
-    }*/
+    }
 
     document.getElementById(nom + `-hand`).append(newCard);
-/*
+
     if (joueur.pointsMain > 21) {
         console.log("La partie est perdue");
         mainBloquee = true;
     }
-    */
+
     cards.splice(card, 1);
     if(cards.length == 0){
         cards = fillDeck();

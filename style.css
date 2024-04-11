@@ -81,17 +81,5 @@ input {
 
 .cover:hover {
     box-shadow: none;
-}
-
-.bank-card {
-    position: relative;
     z-index: 0;
-    rotate: 2deg;
-}
-
-.bank-card2 {
-    position: relative;
-    margin-left: -90px;
-    z-index: 1;
-    rotate: 0deg;
 }
