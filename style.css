@@ -83,3 +83,7 @@ input {
     box-shadow: none;
     z-index: 0;
 }
+
+input:disabled {
+    cursor: auto;
+}

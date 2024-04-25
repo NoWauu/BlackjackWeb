@@ -1,4 +1,3 @@
-let nbPoints = 0;
 let mainBloquee = false;
 let gameStatus = "early";
 
@@ -15,7 +14,6 @@ const joueurs = {
     }
 }
 
-
 // Création du paquet de carte
 function fillDeck() {
     let cards = [];
@@ -28,7 +26,6 @@ function fillDeck() {
 }
 
 let cards = fillDeck();
-
 
 function integerToWord(num) {
     switch(num) {
@@ -65,7 +62,6 @@ function integerToWord(num) {
 
 function getCardImg(cardName) {
     let c = cardName.split("-");
-    
     return `${c[1]}_of_${c[2]}.svg`;
 }
 
@@ -75,19 +71,19 @@ document.getElementById("draw").addEventListener('click', function() {
 });
 document.getElementById("start").addEventListener('click', startRound);
 document.getElementById("lock").addEventListener('click', lockCards);
+document.getElementById("restart").addEventListener('click', startRound);
 document.getElementById("draw").style.opacity = 0;
 document.getElementById("draw").disabled = true;
 document.getElementById("lock").style.opacity = 0;
 document.getElementById("lock").disabled = true;
+document.getElementById("restart").style.opacity = 0;
+document.getElementById("restart").disabled = true;
 
 function drawCard(nom, joueur) {
-    if(gameStatus !== "playing") return;
+    if(gameStatus !== "playing" && gameStatus !== "starting") return;
     if(mainBloquee) return;
 
     let card = Math.floor(Math.random() * cards.length);
-    console.log(card);
-    console.log(cards[card]);
-    console.log(getCardImg(cards[card]));
     joueur.main.push(cards[card]);
     joueur.pointsMain = countPoints(joueur)
 /*
@@ -108,13 +104,12 @@ function drawCard(nom, joueur) {
 
     document.getElementById(nom + `-hand`).append(newCard);
 
-    if (joueur.pointsMain > 21) {
-        console.log("La partie est perdue");
-        mainBloquee = true;
+    if (gameStatus === "playing") {
+        verifPoints(joueur);
     }
 
     cards.splice(card, 1);
-    if(cards.length == 0){
+    if (cards.length == 0) {
         cards = fillDeck();
     }
 }
@@ -128,7 +123,7 @@ function countPoints(joueur) {
 }
 
 function startRound() {
-    gameStatus = "playing";
+    gameStatus = "starting";
     mainBloquee = false;
     document.getElementById("start").style.opacity = 0;
     document.getElementById("start").disabled = true;
@@ -136,24 +131,61 @@ function startRound() {
     document.getElementById("draw").disabled = false;
     document.getElementById("lock").style.opacity = 1;
     document.getElementById("lock").disabled = false;
+    document.getElementById("restart").style.opacity = 0;
+    document.getElementById("restart").disabled = true;
     console.log("Début de la partie");
-
 
     Object.entries(joueurs).forEach(([key, _]) => {
         joueurs[key].main = [];
         joueurs[key].pointMain = 0;
+        document.getElementById(`${key}-hand`).innerHTML = "";
     });
 
     for(let i = 0; i < 2; ++i) {
-        Object.entries(joueurs).forEach(([k, _])=> {
+        Object.entries(joueurs).forEach(([k, _]) => {
             drawCard(k, joueurs[k]);
         });
     }
 
     console.log("C'est à vous de jouer")
+    gameStatus = "playing";
 }
 
 function lockCards() {
     mainBloquee = true;
     console.log("Vous avez bloqué votre main");
+}
+
+function verifPoints(joueur) {
+    if (joueur.pointsMain > 21) {
+        joueur.main.forEach(card => {
+            if(card.startsWith("11-ace")) {
+                joueur.pointsMain -= 10
+            }
+        });
+
+        console.log(joueur.pointsMain);
+
+        if (joueur.pointsMain > 21) {
+            finPartie(false)
+        }
+    }
+
+    if (joueur.pointsMain === 21) {
+        finPartie(true)
+    }
+}
+
+function finPartie(victoire) {
+    mainBloquee = true
+    gameStatus = "final"
+    if (victoire) {
+        //joueur.pointsPartie++;
+        console.log("Vous avez gagné !")
+    } else {
+        // Mettre point à l'autre
+        console.log("La partie est perdue")
+    }
+    document.getElementById("restart").style.opacity = 1
+    document.getElementById("restart").disabled = false
 }
