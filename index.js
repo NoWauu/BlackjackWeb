@@ -167,25 +167,25 @@ function verifPoints(joueur) {
         console.log(joueur.pointsMain);
 
         if (joueur.pointsMain > 21) {
-            finPartie(false)
+            finPartie(joueur, false);
         }
     }
 
     if (joueur.pointsMain === 21) {
-        finPartie(true)
+        finPartie(joueur, true);
     }
 }
 
-function finPartie(victoire) {
-    mainBloquee = true
-    gameStatus = "final"
+function finPartie(joueur, victoire) {
+    mainBloquee = true;
+    gameStatus = "final";
     if (victoire) {
-        //joueur.pointsPartie++;
-        console.log("Vous avez gagné !")
+        joueur.pointsPartie++;
+        console.log("Vous avez gagné !");
     } else {
         // Mettre point à l'autre
-        console.log("La partie est perdue")
+        console.log("La partie est perdue");
     }
-    document.getElementById("restart").style.opacity = 1
-    document.getElementById("restart").disabled = false
+    document.getElementById("restart").style.opacity = 1;
+    document.getElementById("restart").disabled = false;
 }
