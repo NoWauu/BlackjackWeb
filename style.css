@@ -87,3 +87,12 @@ input {
 input:disabled {
     cursor: auto;
 }
+
+#win {
+    position: absolute;
+    top: 50%;
+}
+
+.disabled {
+    opacity: 0;
+}

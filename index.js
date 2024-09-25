@@ -173,6 +173,7 @@ function verifPoints(joueur) {
 
     if (joueur.pointsMain === 21) {
         finPartie(joueur, true);
+        document.getElementById("win").style.opacity = 1;
     }
 }
 
